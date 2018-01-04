@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using TrainingWheels.Data;
 using TrainingWheels.WebApi.Models;
 using TrainingWheels.WebApi.Providers;
 using TrainingWheels.WebApi.Results;
