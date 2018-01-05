@@ -11,6 +11,13 @@ namespace TrainingWheels.Services
 {
     public class ActivityService : IActivityService
     {
+        private readonly Guid _adminId;
+
+        public ActivityService(Guid adminId)
+        {
+            _adminId = adminId;
+        }
+
         public ActivityService()
         {
         }
@@ -27,7 +34,19 @@ namespace TrainingWheels.Services
 
         public bool CreateActivity(ActivityCreate model)
         {
-            throw new NotImplementedException();
+            var entity =
+                new ActivityEntity()
+                {
+                    ActivityId = model.ActivityId,
+                    Name = model.Name,
+                    Category = model.Category,
+                    Score = model.Score
+                };
+                using (var ctx = new ApplicationDbContext())
+                {
+                    ctx.Activities.Add(entity);
+                    return ctx.SaveChanges() == 1;
+                }
         }
 
         public IEnumerable<ActivityListItem> GetActivities()
