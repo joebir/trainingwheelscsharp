@@ -78,21 +78,11 @@
     <Compile Include="ActivityEntity.cs" />
     <Compile Include="ArchiveEntity.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\201801042146095_Initial.cs" />
-    <Compile Include="Migrations\201801042146095_Initial.Designer.cs">
-      <DependentUpon>201801042146095_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801042146095_Initial.resx">
-      <DependentUpon>201801042146095_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
