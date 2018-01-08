@@ -12,14 +12,12 @@ namespace TrainingWheels.Services
     public class ActivityService : IActivityService
     {
         private readonly Guid _adminId;
+        private readonly Guid _userId;
 
-        public ActivityService(Guid adminId)
+        public ActivityService(Guid adminId, Guid userId)
         {
             _adminId = adminId;
-        }
-
-        public ActivityService()
-        {
+            _userId = userId;
         }
 
         private ActivityEntity GetActivitiesFromDatabase(ApplicationDbContext context, int activityId)

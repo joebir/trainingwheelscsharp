@@ -50,6 +50,7 @@
     <Compile Include="ActivityCreate.cs" />
     <Compile Include="ActivityEdit.cs" />
     <Compile Include="ActivityListItem.cs" />
+    <Compile Include="ArchiveListItem.cs" />
     <Compile Include="ArchiveModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

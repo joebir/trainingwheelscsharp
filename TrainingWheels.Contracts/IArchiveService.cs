@@ -9,8 +9,8 @@ namespace TrainingWheels.Contracts
 {
     public interface IArchiveService
     {
-        IEnumerable<ArchiveModel> GetActivityHistory();
-        IEnumerable<ArchiveModel> GetTodaysArchive();
+        IEnumerable<ArchiveListItem> GetActivityHistory();
+        IEnumerable<ArchiveListItem> GetTodaysArchive();
         bool CreateArchiveEntry(ArchiveModel model);
         bool DeleteArchiveEntry(ArchiveModel model);
     }
