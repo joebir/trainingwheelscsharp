@@ -12,11 +12,10 @@ namespace TrainingWheels.Services
     public class ActivityService : IActivityService
     {
         private readonly Guid _adminId;
-        private readonly Guid _userId;
+        private readonly ApplicationUser _userId;
 
-        public ActivityService(Guid adminId, Guid userId)
+        public ActivityService(ApplicationUser userId)
         {
-            _adminId = adminId;
             _userId = userId;
         }
 
@@ -63,6 +62,27 @@ namespace TrainingWheels.Services
                                  })
                        .ToList();
             }
+        }
+
+        public ActivityListItem GetActivityById(int activityId)
+        {
+            ActivityEntity entity;
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                entity = GetActivitiesFromDatabase(ctx, activityId);
+            }
+
+            if (entity == null) return new ActivityListItem();
+
+            return
+                new ActivityListItem
+                {
+                    ActivityId = entity.ActivityId,
+                    Name = entity.Name,
+                    Category = entity.Category,
+                };
+
         }
 
         public bool UpdateActivity(ActivityEdit model)
