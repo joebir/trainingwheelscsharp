@@ -17,6 +17,7 @@ using TrainingWheels.Data;
 using TrainingWheels.WebApi.Models;
 using TrainingWheels.WebApi.Providers;
 using TrainingWheels.WebApi.Results;
+using System.Linq;
 
 namespace TrainingWheels.WebApi.Controllers
 {
@@ -338,8 +339,34 @@ namespace TrainingWheels.WebApi.Controllers
                 return GetErrorResult(result);
             }
 
-            return Ok();
+            return Ok( new
+            {
+                HttpContext.Current.User.Identity.IsAuthenticated,
+                HttpContext.Current.User.Identity.Name,
+                result
+            });
         }
+
+        [Route("AddUserToAdmin")]
+         public async Task<IHttpActionResult> AddUserToAdmin(AddUserToAdminModel model)
+         {
+             var roles = ApplicationRoleManager.Create(HttpContext.Current.GetOwinContext());
+             
+            if (!await roles.RoleExistsAsync(SecurityRoles.Admin))
+            {
+               await roles.CreateAsync(new IdentityRole { Name = SecurityRoles.Admin});
+            }
+            // check to see if a user is found?
+            var userResult = await UserManager.FindByEmailAsync(model.Email);
+
+            var roleResult = await UserManager.AddToRoleAsync(userResult.Id, SecurityRoles.Admin);
+            if (!roleResult.Succeeded)
+            {
+                return GetErrorResult(roleResult);
+            }
+
+            return Ok();
+         }
 
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
