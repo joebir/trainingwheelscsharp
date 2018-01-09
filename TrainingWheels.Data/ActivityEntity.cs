@@ -11,10 +11,13 @@ namespace TrainingWheels.Data
     {
         [Key]
         public int ActivityId { get; set; }
+
         [Required]
         public string Name { get; set; }
+
         [Required]
         public int Category { get; set; }
+
         [Required]
         public int Score { get; set; }
     }

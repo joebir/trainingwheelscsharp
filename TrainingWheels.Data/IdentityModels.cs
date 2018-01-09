@@ -29,6 +29,7 @@ namespace TrainingWheels.Data
         [Required]
         public int CnOScore { get; set; }
 
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -40,9 +41,8 @@ namespace TrainingWheels.Data
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-
-        public DbSet<ActivityEntity> Activity { get; set; }
-        public DbSet<ArchiveEntity> Archive { get; set; }
+        public DbSet<ActivityEntity> Activities { get; set; }
+        public DbSet<ArchiveEntity> Archives { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
