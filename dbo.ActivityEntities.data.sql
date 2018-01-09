@@ -1,0 +1,1 @@
+﻿INSERT INTO [dbo].[ActivityEntities] ([Name], [Category], [Score]) VALUES ('Brushed Teeth', 1, 200/14)

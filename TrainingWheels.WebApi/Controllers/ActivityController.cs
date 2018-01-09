@@ -21,7 +21,20 @@ namespace TrainingWheels.WebApi.Controllers
             var activities = activityService.GetActivities();
             return Ok(activities);
         }
-        
+
+        // GET /api/activity/4
+        public IHttpActionResult Get(int id)
+        {
+            var activityService = CreateActivityService();
+
+            var activity = activityService.GetActivityById(id);
+
+            if (activity == null) return NotFound();
+
+            return Ok(activity);
+
+        }
+
         public IHttpActionResult Post(ActivityCreate model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);

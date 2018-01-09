@@ -21,6 +21,16 @@ namespace TrainingWheels.WebApi.Controllers
             return Ok(archives);
         }
 
+        // GET /api/archive
+        public IHttpActionResult Get(int id)
+        {
+            var archiveService = CreateArchiveService();
+            var todaysArchive = archiveService.GetTodaysArchive();
+            if (todaysArchive == null) return NotFound();
+            return Ok(todaysArchive);
+
+        }
+
         public IHttpActionResult Post(ArchiveModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);

@@ -57,7 +57,9 @@ namespace TrainingWheels.Services
                                  new ActivityListItem()
                                  {
                                      ActivityId = e.ActivityId,
-                                     Name = e.Name
+                                     Name = e.Name,
+                                     //??
+                                     Category = e.Category,
                                  })
                        .ToList();
             }

@@ -32,23 +32,30 @@ namespace TrainingWheels.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var activityService = new ActivityService(_userId);
-
-                return
-                     ctx
+                var archive =
+                       ctx
                          .Archives
-                         .Where(e => Guid.Parse(e.ApplicationUser.Id) == _userId)
+                         .Where(e => e.Id == _userId)
                          .Select(
                              e =>
                                  new ArchiveListItem()
                                  {
                                      ArchiveId = e.ArchiveId,
                                      ActivityId = e.ActivityId,
-                                     Name = activityService.GetActivityById(e.ActivityId).Name,
-                                     Category = activityService.GetActivityById(e.ActivityId).Category,
                                      CreatedUtc = e.CreatedUtc,
-                                 })
-                       .ToList();
+                                 });
+
+                var complete = archive.ToList();
+
+                var activityService = new ActivityService(_userId);
+
+                foreach (var activity in complete)
+                {
+                    activity.Name = activityService.GetActivityById(activity.ActivityId).Name;
+                    activity.Category = activityService.GetActivityById(activity.ActivityId).Category;
+                }
+
+                return complete;
             }
         }
 
@@ -61,7 +68,7 @@ namespace TrainingWheels.Services
                 return
                      ctx
                          .Archives
-                         .Where(e => e.CreatedUtc == DateTime.Now.Date && Guid.Parse(e.ApplicationUser.Id) == _userId)
+                         .Where(e => e.CreatedUtc == DateTime.Now.Date && e.Id == _userId)
                          .Select(
                              e =>
                                  new ArchiveListItem()
@@ -83,9 +90,7 @@ namespace TrainingWheels.Services
                 {
                     ArchiveId = model.ArchiveId,
                     Id = model.Id,
-                    ApplicationUser = model.ApplicationUser,
                     ActivityId = model.ActivityId,
-                    ActivityEntity = model.ActivityEntity,
                     CreatedUtc = DateTime.Now,
                 };
             using (var ctx = new ApplicationDbContext())
@@ -102,7 +107,7 @@ namespace TrainingWheels.Services
                 var entity =
                     ctx
                         .Archives
-                        .Single(e => e.ArchiveId == id && Guid.Parse(e.ApplicationUser.Id) == _userId);
+                        .Single(e => e.ArchiveId == id && e.Id == _userId);
 
                 ctx.Archives.Remove(entity);
                 return ctx.SaveChanges() == 1;
