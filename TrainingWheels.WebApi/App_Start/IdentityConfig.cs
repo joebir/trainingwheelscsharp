@@ -12,6 +12,8 @@ namespace TrainingWheels.WebApi
 
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
+
+
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
@@ -41,6 +43,17 @@ namespace TrainingWheels.WebApi
                 manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
+        }
+    }
+
+    public class ApplicationRoleManager : RoleManager<IdentityRole>
+    {
+        public ApplicationRoleManager(RoleStore<IdentityRole> store) : base(store) { }
+ 
+        public static ApplicationRoleManager Create(IOwinContext context)
+        {
+            var store = new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>());
+            return new ApplicationRoleManager(store);
         }
     }
 }

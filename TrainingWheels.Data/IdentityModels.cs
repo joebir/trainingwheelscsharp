@@ -4,6 +4,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
+using System;
 
 namespace TrainingWheels.Data
 {
@@ -40,9 +42,8 @@ namespace TrainingWheels.Data
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-
-        public DbSet<ActivityEntity> Activity { get; set; }
-        public DbSet<ArchiveEntity> Archive { get; set; }
+        public DbSet<ActivityEntity> Activities { get; set; }
+        public DbSet<ArchiveEntity> Archives { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -53,5 +54,10 @@ namespace TrainingWheels.Data
         {
             return new ApplicationDbContext();
         }
+    }
+
+    public class SecurityRoles
+    {
+        public const string Admin = "admin";
     }
 }

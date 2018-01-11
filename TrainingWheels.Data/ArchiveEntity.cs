@@ -10,7 +10,7 @@ namespace TrainingWheels.Data
     public class ArchiveEntity
     {
         [Key]
-        public int EventId { get; set; }
+        public int ArchiveId { get; set; }
 
         // Foreign key to relate event with user
         public Guid Id { get; set; }
