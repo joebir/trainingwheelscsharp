@@ -58,6 +58,7 @@
     <Compile Include="ActivityListItem.cs" />
     <Compile Include="ArchiveListItem.cs" />
     <Compile Include="ArchiveModel.cs" />
+    <Compile Include="NotespaceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
