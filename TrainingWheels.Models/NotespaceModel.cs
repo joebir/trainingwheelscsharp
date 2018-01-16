@@ -8,7 +8,7 @@ namespace TrainingWheels.Models
 {
     public class NotespaceModel
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string Note { get; set; }
     }
 }

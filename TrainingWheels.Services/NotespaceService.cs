@@ -11,9 +11,9 @@ namespace TrainingWheels.Services
 {
     public class NotespaceService : INotespaceService
     {
-        private readonly Guid _userId;
+        private readonly string _userId;
 
-        public NotespaceService(Guid userId)
+        public NotespaceService(string userId)
         {
             _userId = userId;
         }
@@ -32,7 +32,7 @@ namespace TrainingWheels.Services
             return
                 new NotespaceModel()
                 {
-                    Id = Guid.Parse(user.Id),
+                    Id = user.Id,
                     Note = user.Note
                 };
         }
@@ -42,7 +42,7 @@ namespace TrainingWheels.Services
             return
                 context
                     .Users
-                    .SingleOrDefault(e => Guid.Parse(e.Id) == _userId);
+                    .SingleOrDefault(e => e.Id == _userId);
         }
 
 
@@ -53,7 +53,7 @@ namespace TrainingWheels.Services
                 var user =
                     ctx
                         .Users
-                        .SingleOrDefault(e => Guid.Parse(e.Id) == model.Id);
+                        .SingleOrDefault(e => e.Id == model.Id);
 
                 if (user == null) return false;
 
