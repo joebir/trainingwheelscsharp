@@ -21,7 +21,7 @@ namespace TrainingWheels.WebApi.Controllers
             return Ok(archives);
         }
 
-        // GET /api/archive
+        // GET /api/archive/
         public IHttpActionResult Get(int id)
         {
             var archiveService = CreateArchiveService();

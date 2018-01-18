@@ -65,21 +65,33 @@ namespace TrainingWheels.Services
             {
                 var activityService = new ActivityService(_userId);
 
-                return
+                var archives =
                      ctx
                          .Archives
-                         .Where(e => e.CreatedUtc == DateTime.Now.Date && e.Id == _userId)
+                         .Where(e => e.Id == _userId)
                          .Select(
                              e =>
                                  new ArchiveListItem()
                                  {
                                      ArchiveId = e.ArchiveId,
                                      ActivityId = e.ActivityId,
-                                     Name = activityService.GetActivityById(e.ActivityId).Name,
-                                     Category = activityService.GetActivityById(e.ActivityId).Category,
                                      CreatedUtc = e.CreatedUtc,
                                  })
                        .ToList();
+
+                List<ArchiveListItem> toReturn = new List<ArchiveListItem>();
+
+                foreach (ArchiveListItem archive in archives)
+                {
+                    if (archive.CreatedUtc.Date == DateTime.Now.Date)
+                    {
+                        archive.Name = activityService.GetActivityById(archive.ActivityId).Name;
+                        archive.Category = activityService.GetActivityById(archive.ActivityId).Category;
+                        toReturn.Add(archive);
+                    }
+                }
+
+                return toReturn;
             }
         }
 
@@ -92,10 +104,24 @@ namespace TrainingWheels.Services
                     ActivityId = activityId,
                     CreatedUtc = DateTime.Now,
                 };
+
             using (var ctx = new ApplicationDbContext())
             {
+                var activity = ctx.Activities.SingleOrDefault(e => entity.ActivityId == e.ActivityId);
+
+                if (activity.Category == 1)
+                        ctx.Users.SingleOrDefault(e => _userId == Guid.Parse(e.Id)).HnWScore += activity.Score;
+                else if (activity.Category == 2)
+                    ctx.Users.SingleOrDefault(e => _userId == Guid.Parse(e.Id)).HygScore += activity.Score;
+                else if (activity.Category == 3)
+                    ctx.Users.SingleOrDefault(e => _userId == Guid.Parse(e.Id)).FinScore += activity.Score;
+                else if (activity.Category == 4)
+                    ctx.Users.SingleOrDefault(e => _userId == Guid.Parse(e.Id)).SocScore += activity.Score;
+                else if (activity.Category == 5)
+                    ctx.Users.SingleOrDefault(e => _userId == Guid.Parse(e.Id)).CnOScore += activity.Score;
+
                 ctx.Archives.Add(entity);
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() == 2;
             }
         }
 
