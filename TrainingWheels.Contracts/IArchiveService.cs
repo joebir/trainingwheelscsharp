@@ -11,7 +11,7 @@ namespace TrainingWheels.Contracts
     {
         IEnumerable<ArchiveListItem> GetActivityHistory();
         IEnumerable<ArchiveListItem> GetTodaysArchive();
-        bool CreateArchiveEntry(ArchiveModel model);
+        bool CreateArchiveEntry(int activityId);
         bool DeleteArchiveEntry(int archiveId);
     }
 }

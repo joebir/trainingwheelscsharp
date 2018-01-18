@@ -83,14 +83,13 @@ namespace TrainingWheels.Services
             }
         }
 
-        public bool CreateArchiveEntry(ArchiveModel model)
+        public bool CreateArchiveEntry(int activityId)
         {
             var entity =
                 new ArchiveEntity()
                 {
-                    ArchiveId = model.ArchiveId,
-                    Id = model.Id,
-                    ActivityId = model.ActivityId,
+                    Id = _userId,
+                    ActivityId = activityId,
                     CreatedUtc = DateTime.Now,
                 };
             using (var ctx = new ApplicationDbContext())

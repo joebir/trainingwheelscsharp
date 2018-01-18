@@ -31,13 +31,13 @@ namespace TrainingWheels.WebApi.Controllers
 
         }
 
-        public IHttpActionResult Post(ArchiveModel model)
+        public IHttpActionResult Post(int id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var service = CreateArchiveService();
 
-            if (!service.CreateArchiveEntry(model))
+            if (!service.CreateArchiveEntry(id))
                 return InternalServerError();
 
             return Ok();
