@@ -55,9 +55,14 @@
   <ItemGroup>
     <Compile Include="IActivityService.cs" />
     <Compile Include="IArchiveService.cs" />
+    <Compile Include="INotespaceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TrainingWheels.Data\TrainingWheels.Data.csproj">
+      <Project>{6E1E150D-3337-4AAF-8616-B69BFEF15CCB}</Project>
+      <Name>TrainingWheels.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TrainingWheels.Models\TrainingWheels.Models.csproj">
       <Project>{AE742F57-CDDA-4E13-B26E-BC10FEB1BAD9}</Project>
       <Name>TrainingWheels.Models</Name>
