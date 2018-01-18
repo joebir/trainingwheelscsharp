@@ -108,17 +108,18 @@ namespace TrainingWheels.Services
             using (var ctx = new ApplicationDbContext())
             {
                 var activity = ctx.Activities.SingleOrDefault(e => entity.ActivityId == e.ActivityId);
+                string idString = _userId.ToString();
 
                 if (activity.Category == 1)
-                        ctx.Users.SingleOrDefault(e => _userId == Guid.Parse(e.Id)).HnWScore += activity.Score;
+                        ctx.Users.SingleOrDefault(e => idString == e.Id).HnWScore += activity.Score;
                 else if (activity.Category == 2)
-                    ctx.Users.SingleOrDefault(e => _userId == Guid.Parse(e.Id)).HygScore += activity.Score;
+                    ctx.Users.SingleOrDefault(e => idString == e.Id).HygScore += activity.Score;
                 else if (activity.Category == 3)
-                    ctx.Users.SingleOrDefault(e => _userId == Guid.Parse(e.Id)).FinScore += activity.Score;
+                    ctx.Users.SingleOrDefault(e => idString == e.Id).FinScore += activity.Score;
                 else if (activity.Category == 4)
-                    ctx.Users.SingleOrDefault(e => _userId == Guid.Parse(e.Id)).SocScore += activity.Score;
+                    ctx.Users.SingleOrDefault(e => idString == e.Id).SocScore += activity.Score;
                 else if (activity.Category == 5)
-                    ctx.Users.SingleOrDefault(e => _userId == Guid.Parse(e.Id)).CnOScore += activity.Score;
+                    ctx.Users.SingleOrDefault(e => idString == e.Id).CnOScore += activity.Score;
 
                 ctx.Archives.Add(entity);
                 return ctx.SaveChanges() == 2;
