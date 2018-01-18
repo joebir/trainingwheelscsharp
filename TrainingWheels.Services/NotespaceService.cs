@@ -32,7 +32,7 @@ namespace TrainingWheels.Services
             return
                 new NotespaceModel()
                 {
-                    Id = user.Id,
+                    Id = _userId,
                     Note = user.Note
                 };
         }

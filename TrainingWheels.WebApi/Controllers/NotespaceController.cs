@@ -22,6 +22,7 @@ namespace TrainingWheels.WebApi.Controllers
 
         public IHttpActionResult Put(NotespaceModel model)
         {
+            model.Id = User.Identity.GetUserId();
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
