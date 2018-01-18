@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TrainingWheels.Data;
 
 namespace TrainingWheels.Models
 {
-    public class ArchiveModel
+    public class NotespaceModel
     {
-        // Foreign key to relate archive with Activity
-        public int ActivityId { get; set; }
+        public string Id { get; set; }
+        public string Note { get; set; }
     }
 }

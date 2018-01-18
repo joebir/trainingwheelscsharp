@@ -21,7 +21,7 @@ namespace TrainingWheels.WebApi.Controllers
             return Ok(archives);
         }
 
-        // GET /api/archive
+        // GET /api/archive/
         public IHttpActionResult Get(int id)
         {
             var archiveService = CreateArchiveService();
@@ -31,13 +31,13 @@ namespace TrainingWheels.WebApi.Controllers
 
         }
 
-        public IHttpActionResult Post(ArchiveModel model)
+        public IHttpActionResult Post(int id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var service = CreateArchiveService();
 
-            if (!service.CreateArchiveEntry(model))
+            if (!service.CreateArchiveEntry(id))
                 return InternalServerError();
 
             return Ok();
