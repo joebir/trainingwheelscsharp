@@ -32,6 +32,16 @@ namespace TrainingWheels.WebApi.Models
         public bool HasRegistered { get; set; }
 
         public string LoginProvider { get; set; }
+
+        public int HnWScore { get; set; }
+
+        public int HygScore { get; set; }
+
+        public int FinScore { get; set; }
+
+        public int SocScore { get; set; }
+
+        public int CnOScore { get; set; }
     }
 
     public class UserLoginInfoViewModel
