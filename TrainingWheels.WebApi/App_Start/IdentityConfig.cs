@@ -49,7 +49,7 @@ namespace TrainingWheels.WebApi
     public class ApplicationRoleManager : RoleManager<IdentityRole>
     {
         public ApplicationRoleManager(RoleStore<IdentityRole> store) : base(store) { }
- 
+
         public static ApplicationRoleManager Create(IOwinContext context)
         {
             var store = new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>());
