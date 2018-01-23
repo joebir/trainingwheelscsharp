@@ -60,12 +60,32 @@ namespace TrainingWheels.WebApi.Controllers
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
-            return new UserInfoViewModel
+            int[] scores = new int[5];
+            string id = User.Identity.GetUserId();
+
+            using (var ctx = new ApplicationDbContext())
             {
-                Email = User.Identity.GetUserName(),
-                HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
-            };
+                var user = ctx.Users.SingleOrDefault(
+                    e => e.Id == id);
+
+                scores[0] = user.HnWScore;
+                scores[1] = user.HygScore;
+                scores[2] = user.FinScore;
+                scores[3] = user.SocScore;
+                scores[4] = user.CnOScore;
+            }
+
+                return new UserInfoViewModel
+                {
+                    Email = User.Identity.GetUserName(),
+                    HasRegistered = externalLogin == null,
+                    LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null,
+                    HnWScore = scores[0],
+                    HygScore = scores[1],
+                    FinScore = scores[2],
+                    SocScore = scores[3],
+                    CnOScore = scores[4]
+                };
         }
 
         // POST api/Account/Logout
